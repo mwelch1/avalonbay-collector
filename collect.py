@@ -42,6 +42,7 @@ def filter_listings(results):
                     details = {
                         'Unit': apartment['apartmentNumber'],
                         'Type': f"{apartment['beds']} beds and {apartment['baths']} baths",
+                        'Collection': finishPackages['finishPackageName'],
                         'SqFt': apartment['apartmentSize'],
                         'Available Date': available_date.strftime('%Y-%m-%d'),
                         'Rent': apartment['pricing']['effectiveRent'],
