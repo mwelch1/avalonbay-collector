@@ -57,8 +57,10 @@ def insert_or_update(airtable, units):
     for unit in units:
         match = airtable.match('Unit', unit['Unit'])
         if match:
+            print(f"Found existing entry for unit {unit['Unit']}")
             airtable.update(match['id'], unit)
         else:
+            print(f"Creating new entry for unit {unit['Unit']}")
             airtable.insert(unit)
 
 
@@ -68,6 +70,7 @@ def cleanup(airtable, units):
         for record in page:
             unit = record['fields']['Unit']
             if unit not in new_units:
+                print(f"Marking unit {unit} as unavailable")
                 airtable.update(record['id'], {'Available': False})
 
 
