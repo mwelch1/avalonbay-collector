@@ -35,16 +35,13 @@ def filter_listings(results):
         for availableFloorPlan in availableFloorPlans:
             for finishPackages in availableFloorPlan['finishPackages']:
                 for apartment in finishPackages['apartments']:
-                    timestamp = re.split(
-                        '\(|\)', apartment['pricing']['availableDate'])[1][:10]
-                    available_date = datetime.datetime.fromtimestamp(
-                        int(timestamp))
+                    available_date = apartment['pricing']['availableDate']
                     details = {
                         'Unit': apartment['apartmentNumber'],
                         'Type': f"{apartment['beds']} beds and {apartment['baths']} baths",
                         'Collection': finishPackages['finishPackageName'],
                         'SqFt': apartment['apartmentSize'],
-                        'Available Date': available_date.strftime('%Y-%m-%d'),
+                        'Available Date': available_date,
                         'Rent': apartment['pricing']['effectiveRent'],
                         'Floorplan': [{'url': availableFloorPlan['floorPlanImage']}],
                         'Available': True
